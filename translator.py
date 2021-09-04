@@ -95,7 +95,7 @@ global current_time; current_time = now.strftime("%H:%M:%S")
 print()
 
 print("Loading resources...")
-import resource_rc # Use uiresupdate.bat to update the UI resources (TODO: Create a Linux version of the file)
+import resource_rc
 print("Loading resources done.")
 
 def config(num=0, default="", cfg="config.txt"):
