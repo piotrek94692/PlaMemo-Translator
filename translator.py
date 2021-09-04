@@ -37,13 +37,18 @@ print("Loading...")
 
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 
-required = {'googletrans==4.0.0-rc1', 'PyQt5'} # Add modules that aren't installed by default, here
+required = {"googletrans==4.0.0-rc1", "PyQt5"} # Add modules that aren't installed by default, here
 installed = {pkg.key for pkg in pkg_resources.working_set}
 missing = required - installed
 
+devnull = open(os.devnull, "w")
+
 if missing:
     python = sys.executable
-    subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
+    try:
+        subprocess.check_call([python, "-m", "pip", "install", *missing], stdout=devnull)
+    except Exception:
+        pass
 
 global plt; plt = platform.system()
 
@@ -51,18 +56,20 @@ print()
 
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
-global versionstr; versionstr = "alpha1"
-global version; version = "Alpha 1"
+global versionstr; versionstr = "Alpha 1"
+global version; version = "alpha1"
 
 global title; title = "PlaMemo Translator - " + versionstr
 global appid; appid = "plamemo.translator." + version
 
 # Set console window title
-ctypes.windll.kernel32.SetConsoleTitleA(title) # ANSI
-ctypes.windll.kernel32.SetConsoleTitleW(title) # UNICODE
+if plt == "Windows":
+    ctypes.windll.kernel32.SetConsoleTitleA(title) # ANSI
+    ctypes.windll.kernel32.SetConsoleTitleW(title) # UNICODE
 
 # A different app ID is required for a custom icon
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
+if plt == "Windows":
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
 
 print(title)
 
@@ -91,10 +98,23 @@ print("Loading resources...")
 import resource_rc # Use uiresupdate.bat to update the UI resources (TODO: Create a Linux version of the file)
 print("Loading resources done.")
 
+def config(num=0, default="", cfg="config.txt"):
+    num = num - 1
+    try:
+        f = open("config/" + cfg)
+    except Exception:
+        return default
+    lines = f.readlines()
+    try:
+        lines[num]
+    except Exception:
+        return default
+    return lines[num].strip()
+
 print("Loading UI...")
 
 global app; app = QApplication(sys.argv)
-app.setStyle("Fusion") # Set the skin here
+app.setStyle(config(7, "Fusion"))
 
 # To check available skins, execute this code in your Python console:
 # import PyQt5.QtWidgets; print(PyQt5.QtWidgets.QStyleFactory.keys())
@@ -108,7 +128,7 @@ global loaded; loaded = False # Is a file loaded?
 global notlooping; notlooping = False
 global aboutopen; aboutopen = False # Is the About window open?
 
-global encoding; encoding = "utf-8" # Set file encoding here
+global encoding; encoding = config(11, "utf-8")
 
 def openFileNameDialog(self):
     global file
@@ -220,7 +240,7 @@ class Ui(QMainWindow):
             if plt == "Windows":
                 subprocess.call([r"compile.bat"]); print(); print("Compiling done.")
             elif plt == "Linux":
-                subprocess.call(['sh', './compile.sh']); print(); print("Compiling done.")
+                subprocess.call(["sh", "./compile.sh"]); print(); print("Compiling done.")
             elif plt == "Darwin":
                 subprocess.call([r"./compile.bash"]); print(); print("Compiling done.")
             else:
@@ -237,7 +257,7 @@ class Ui(QMainWindow):
             realline = line - 1
             realscene = scene - 1
             file["scenes"][realscene]["texts"][realline][2] = self.newtext.toPlainText()
-            with open(fileName, 'w', encoding=encoding) as f:
+            with open(fileName, "w", encoding=encoding) as f:
                 json.dump(file, f, ensure_ascii=False, indent=4) # Set JSON indent here
                 print()
                 print("Saved the line number " + str(line) + " in scene " + str(scene))
@@ -278,7 +298,7 @@ class Ui(QMainWindow):
 
     def translate(self, text):
         gtranslator = Translator()
-        translation1 = gtranslator.translate(text, src='ja', dest='en')
+        translation1 = gtranslator.translate(text, src="ja", dest="en")
         global translate1; translate1 = translation1
         self.translatetext1.setPlainText(translate1.text)
 
@@ -288,18 +308,18 @@ class Ui(QMainWindow):
         realscene = scene - 1
         try:
             linetext = file["scenes"][realscene]["texts"][realline][2]
-        except:
+        except Exception:
             scene += 1
             realscene = scene - 1
             linetext = file["scenes"][realscene]["texts"][realline][2]
         self.oldtext.setPlainText(linetext)
         try:
             char1 = file["scenes"][realscene]["texts"][realline][3][0]["name"]; self.character.setPlainText(char1)
-        except:
+        except Exception:
             self.character.setPlainText("")
         try:
             char2 = file["scenes"][realscene]["texts"][realline][0]; self.characterextra.setPlainText(char2)
-        except:
+        except Exception:
             self.characterextra.setPlainText("")
         mw.translate(linetext)
         loaded = True

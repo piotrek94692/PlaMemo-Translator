@@ -1,0 +1,11 @@
+# You shouldn't remove comments from this file, all new values should be added at the end, the line order should always be the same (e.g. if a value is on the line 7, it should be on the line 7)
+
+# Skin (read from line 7)
+# To check available skins, execute this code in your Python console:
+# import PyQt5.QtWidgets; print(PyQt5.QtWidgets.QStyleFactory.keys())
+
+Fusion
+
+# File encoding (read from line 11)
+
+utf-8
