@@ -49,9 +49,10 @@ global plt; plt = platform.system()
 
 print()
 
-# You should set the version name here.
-global versionstr; versionstr = "Pre-Release"
-global version; version = "prerelease"
+# The version name can be set here.
+# It should be changed only by an administrator of the project.
+global versionstr; versionstr = "alpha1"
+global version; version = "Alpha 1"
 
 global title; title = "PlaMemo Translator - " + versionstr
 global appid; appid = "plamemo.translator." + version
