@@ -1,0 +1,50 @@
+<RCC>
+  <qresource prefix="logo">
+    <file>images/logo.png</file>
+  </qresource>
+  <qresource prefix="arrowrights">
+    <file>images/arrowrights.png</file>
+  </qresource>
+  <qresource prefix="arrowlefts">
+    <file>images/arrowlefts.png</file>
+  </qresource>
+  <qresource prefix="google">
+    <file>images/google.png</file>
+  </qresource>
+  <qresource prefix="arrowup">
+    <file>images/arrowup.png</file>
+  </qresource>
+  <qresource prefix="arrowdown">
+    <file>images/arrowdown.png</file>
+  </qresource>
+  <qresource prefix="gear">
+    <file>images/gear.png</file>
+  </qresource>
+  <qresource prefix="trash">
+    <file>images/trash.png</file>
+  </qresource>
+  <qresource prefix="close">
+    <file>images/close.png</file>
+  </qresource>
+  <qresource prefix="translation">
+    <file>images/translation.png</file>
+  </qresource>
+  <qresource prefix="apply">
+    <file>images/apply.png</file>
+  </qresource>
+  <qresource prefix="reset">
+    <file>images/reset.png</file>
+  </qresource>
+  <qresource prefix="arrowleft">
+    <file>images/arrowleft.png</file>
+  </qresource>
+  <qresource prefix="arrowright">
+    <file>images/arrowright.png</file>
+  </qresource>
+  <qresource prefix="questionmark">
+    <file>images/questionmark.png</file>
+  </qresource>
+  <qresource prefix="icon">
+    <file>images/icon.jpg</file>
+  </qresource>
+</RCC>
