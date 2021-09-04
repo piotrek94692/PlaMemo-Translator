@@ -148,11 +148,11 @@ def openFileNameDialog(self):
 class AboutUi(QDialog):
     def __init__(self):
         global aboutopen
-        global version
+        global versionstr
         aboutopen = True
         super(AboutUi, self).__init__()
         loadUi("about.ui", self) # Load the About window UI file
-        self.abouttext_2.setText("Made by PIESEL#8040.                                             Version: " + version)
+        self.abouttext_2.setText("Made by PIESEL#8040.                                             Version: " + versionstr)
         self.setWindowFlags(self.windowFlags() | Qt.CustomizeWindowHint)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
