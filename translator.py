@@ -37,11 +37,26 @@ print("Loading...")
 
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 
+def config(num=0, default="", cfg="config.txt"):
+    num = num - 1
+    try:
+        f = open("config/" + cfg, encoding="utf-8") # Encoding for configs must be UTF-8, as the config system is used to set encoding for other files
+    except Exception:
+        return default
+    lines = f.readlines()
+    try:
+        lines[num]
+    except Exception:
+        return default
+    return lines[num].strip()
+
+global encoding; encoding = config(11, "utf-8")
+
 required = {"googletrans==4.0.0-rc1", "PyQt5"} # Add modules that aren't installed by default, here
 installed = {pkg.key for pkg in pkg_resources.working_set}
 missing = required - installed
 
-devnull = open(os.devnull, "w")
+devnull = open(os.devnull, "w", encoding=encoding)
 
 if missing:
     python = sys.executable
@@ -56,8 +71,8 @@ print()
 
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
-global versionstr; versionstr = "Alpha 1"
-global version; version = "alpha1"
+global versionstr; versionstr = "Alpha 2"
+global version; version = "alpha2"
 
 global title; title = "PlaMemo Translator - " + versionstr
 global appid; appid = "plamemo.translator." + version
@@ -98,19 +113,6 @@ print("Loading resources...")
 import resource_rc
 print("Loading resources done.")
 
-def config(num=0, default="", cfg="config.txt"):
-    num = num - 1
-    try:
-        f = open("config/" + cfg)
-    except Exception:
-        return default
-    lines = f.readlines()
-    try:
-        lines[num]
-    except Exception:
-        return default
-    return lines[num].strip()
-
 print("Loading UI...")
 
 global app; app = QApplication(sys.argv)
@@ -127,8 +129,6 @@ global scene; scene = 1
 global loaded; loaded = False # Is a file loaded?
 global notlooping; notlooping = False
 global aboutopen; aboutopen = False # Is the About window open?
-
-global encoding; encoding = config(11, "utf-8")
 
 def openFileNameDialog(self):
     global file
@@ -237,14 +237,47 @@ class Ui(QMainWindow):
             print()
             print("Compiling...")
             print()
-            if plt == "Windows":
-                subprocess.call([r"compile.bat"]); print(); print("Compiling done.")
-            elif plt == "Linux":
-                subprocess.call(["sh", "./compile.sh"]); print(); print("Compiling done.")
-            elif plt == "Darwin":
-                subprocess.call([r"./compile.bash"]); print(); print("Compiling done.")
+            cfile = "compile.bat" # Windows support is priority
+            scripttype = config(15, "auto")
+            scriptmethod = config(23, "auto")
+            customfile = config(27, "none")
+            if not scripttype in ("auto", "bat", "sh", "bash"):
+                scripttype = "auto"
+            if not scriptmethod in ("auto", "plain", "dotslash", "shplain", "shdotslash"):
+                scriptmethod = "auto"
+            if not customfile == "none":
+                cfile = customfile
             else:
-                print("Unidentified OS. Couldn't compile.") # TODO: Add option to pick bat/sh/bash or custom file and script launch method.
+                if not scripttype == "auto":
+                    if scripttype == "bat":
+                        cfile == "compile.bat"
+                    elif scripttype == "sh":
+                        cfile == "compile.sh"
+                    elif scripttype == "bash":
+                        cfile == "compile.bash"
+                else:
+                    if plt == "Windows":
+                        cfile == "compile.bat"
+                    elif plt == "Linux":
+                        cfile == "compile.sh"
+                    elif plt == "Darwin":
+                        cfile == "compile.bash"
+            if not scriptmethod == "auto":
+                if scriptmethod == "plain":
+                    subprocess.call([cfile]); print(); print("Compiling done.")
+                elif scriptmethod == "dotslash":
+                    subprocess.call([r"./" + cfile]); print(); print("Compiling done.")
+                elif scriptmethod == "shplain":
+                    subprocess.call(["sh", cfile]); print(); print("Compiling done.")
+                elif scriptmethod == "shdotslash":
+                    subprocess.call(["sh", "./" + cfile]); print(); print("Compiling done.")
+            else:
+                if plt == "Windows":
+                    subprocess.call([cfile]); print(); print("Compiling done.")
+                elif plt == "Linux":
+                    subprocess.call(["sh", "./" + cfile]); print(); print("Compiling done.")
+                elif plt == "Darwin":
+                    subprocess.call([r"./" + cfile]); print(); print("Compiling done.")
 
         def killapp(): global notlooping; notlooping = True; ThisIsNotAnError.KillAppFunction(HasBeenUsed)
 
