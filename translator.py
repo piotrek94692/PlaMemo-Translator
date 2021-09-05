@@ -33,9 +33,34 @@
 # Please report if the links aren't working.
 #
 
+import sys
+
+class LoggerOut(object):
+    def __init__(self):
+        self.terminal = sys.stdout
+        self.logfile = "log.txt"
+
+    def write(self, message):
+        self.terminal.write(message)
+        with open(self.logfile, "a") as f:
+            f.write(message)
+
+class LoggerErr(object):
+    def __init__(self):
+        self.terminal = sys.stderr
+        self.logfile = "log.txt"
+
+    def write(self, message):
+        self.terminal.write(message)
+        with open(self.logfile, "a") as f:
+            f.write(message)
+
+sys.stdout = LoggerOut()
+sys.stderr = LoggerErr()
+
 print("Loading...")
 
-import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
+import subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 
 def config(num=0, default="", cfg="config.txt"):
     num = num - 1
@@ -79,8 +104,8 @@ global appid; appid = "plamemo.translator." + version
 
 # Set console window title
 if plt == "Windows":
-    ctypes.windll.kernel32.SetConsoleTitleA(title) # ANSI
-    ctypes.windll.kernel32.SetConsoleTitleW(title) # UNICODE
+    ctypes.windll.kernel32.SetConsoleTitleA(title + " (Log)") # ANSI
+    ctypes.windll.kernel32.SetConsoleTitleW(title + " (Log)") # UNICODE
 
 # A different app ID is required for a custom icon
 if plt == "Windows":
@@ -171,6 +196,7 @@ class Ui(QMainWindow):
     def __init__(self):
 
         global mw; mw = self
+        global title
 
         def resettranslate():
             global translate1; translate1 = "Please wait..."
@@ -182,6 +208,7 @@ class Ui(QMainWindow):
         loadUi("translator.ui", self) # Load the main window UI file
         self.setWindowFlags(self.windowFlags() | Qt.CustomizeWindowHint)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
+        self.setWindowTitle(title)
 
         def showabout():
             # Allow only one About window
