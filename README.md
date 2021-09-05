@@ -23,3 +23,6 @@ Please report all crashes & bugs on the Issues tab, or add me on Discord: `PIESE
 
 ## Can I customize the app?
 Yes! Check out the `howtoconfigure.txt` file!
+
+## How do I hide the log window?
+Change `translator.py` to `translator.pyw`
