@@ -2,6 +2,9 @@
   <qresource prefix="logo">
     <file>images/logo.png</file>
   </qresource>
+  <qresource prefix="KosugiMaru-Regular">
+    <file>fonts/KosugiMaru-Regular.ttf</file>
+  </qresource>
   <qresource prefix="arrowrights">
     <file>images/arrowrights.png</file>
   </qresource>

@@ -222,9 +222,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Microsoft JhengHei UI Light</family>
+      <family>MotoyaLMaru</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -261,9 +263,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Microsoft JhengHei UI Light</family>
+      <family>MotoyaLMaru</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -462,9 +466,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Microsoft JhengHei UI Light</family>
+      <family>MotoyaLMaru</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -560,9 +566,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Microsoft JhengHei UI Light</family>
+      <family>MotoyaLMaru</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -705,9 +713,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Microsoft JhengHei UI Light</family>
+      <family>MotoyaLMaru</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -790,9 +800,11 @@
     </property>
     <property name="font">
      <font>
-      <family>Microsoft JhengHei UI Light</family>
+      <family>MotoyaLMaru</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -932,6 +944,7 @@
     </property>
     <addaction name="action_Console"/>
     <addaction name="separator"/>
+    <addaction name="action_Preview"/>
     <addaction name="action_CNT"/>
    </widget>
    <addaction name="menu_File"/>
@@ -950,6 +963,11 @@
   <action name="action_Console">
    <property name="text">
     <string>Console</string>
+   </property>
+  </action>
+  <action name="action_Preview">
+   <property name="text">
+    <string>Text Preview</string>
    </property>
   </action>
  </widget>

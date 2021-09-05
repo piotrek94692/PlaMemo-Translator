@@ -121,6 +121,9 @@ app.setStyle(config(7, "Fusion"))
 # To check available skins, execute this code in your Python console:
 # import PyQt5.QtWidgets; print(PyQt5.QtWidgets.QStyleFactory.keys())
 
+fontDatabase = QtGui.QFontDatabase()
+fontDatabase.addApplicationFont("fonts/KosugiMaru-Regular.ttf")
+
 global mw # Use "mw" to reference "self" from the main window, outside of it
 
 global line; line = 1
