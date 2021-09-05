@@ -33,34 +33,7 @@
 # Please report if the links aren't working.
 #
 
-import sys
-
-class LoggerOut(object):
-    def __init__(self):
-        self.terminal = sys.stdout
-        self.logfile = "log.txt"
-
-    def write(self, message):
-        self.terminal.write(message)
-        with open(self.logfile, "a") as f:
-            f.write(message)
-
-class LoggerErr(object):
-    def __init__(self):
-        self.terminal = sys.stderr
-        self.logfile = "log.txt"
-
-    def write(self, message):
-        self.terminal.write(message)
-        with open(self.logfile, "a") as f:
-            f.write(message)
-
-sys.stdout = LoggerOut()
-sys.stderr = LoggerErr()
-
-print("Loading...")
-
-import subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
+import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 
 def config(num=0, default="", cfg="config.txt"):
     num = num - 1
@@ -74,6 +47,33 @@ def config(num=0, default="", cfg="config.txt"):
     except Exception:
         return default
     return lines[num].strip()
+
+global logf; logf = config(31, "log.txt")
+
+class LoggerOut(object):
+    def __init__(self):
+        self.terminal = sys.stdout
+        self.logfile = logf
+
+    def write(self, message):
+        self.terminal.write(message)
+        with open(self.logfile, "a") as f:
+            f.write(message)
+
+class LoggerErr(object):
+    def __init__(self):
+        self.terminal = sys.stderr
+        self.logfile = logf
+
+    def write(self, message):
+        self.terminal.write(message)
+        with open(self.logfile, "a") as f:
+            f.write(message)
+
+sys.stdout = LoggerOut()
+sys.stderr = LoggerErr()
+
+print("Loading...")
 
 global encoding; encoding = config(11, "utf-8")
 

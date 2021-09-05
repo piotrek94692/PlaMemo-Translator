@@ -25,3 +25,7 @@ auto
 # Custom compile file, ignores the "Script file type" setting, include the file extension, "none" disables this setting <read from line 27>
 
 none
+
+# Log file <read from line 31>
+
+log.txt
