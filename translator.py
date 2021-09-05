@@ -49,6 +49,7 @@ def config(num=0, default="", cfg="config.txt"):
     return lines[num].strip()
 
 global logf; logf = config(31, "log.txt")
+global encoding; encoding = config(11, "utf-8")
 
 class LoggerOut(object):
     def __init__(self):
@@ -57,8 +58,11 @@ class LoggerOut(object):
 
     def write(self, message):
         self.terminal.write(message)
-        with open(self.logfile, "a") as f:
+        with open(self.logfile, "a", encoding=encoding) as f:
             f.write(message)
+
+    def flush(self):
+        pass
 
 class LoggerErr(object):
     def __init__(self):
@@ -67,15 +71,16 @@ class LoggerErr(object):
 
     def write(self, message):
         self.terminal.write(message)
-        with open(self.logfile, "a") as f:
+        with open(self.logfile, "a", encoding=encoding) as f:
             f.write(message)
+
+    def flush(self):
+        pass
 
 sys.stdout = LoggerOut()
 sys.stderr = LoggerErr()
 
 print("Loading...")
-
-global encoding; encoding = config(11, "utf-8")
 
 required = {"googletrans==4.0.0-rc1", "PyQt5"} # Add modules that aren't installed by default, here
 installed = {pkg.key for pkg in pkg_resources.working_set}
