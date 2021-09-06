@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #
 #    ___ _                                     _____                     _       _
 #   / _ \ | __ _  /\/\   ___ _ __ ___   ___   /__   \_ __ __ _ _ __  ___| | __ _| |_ ___  _ __
@@ -34,6 +36,24 @@
 #
 
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
+global plt; plt = platform.system()
+
+# The version name can be set here.
+# It should be changed only by an administrator of the project.
+global versionstr; versionstr = "Alpha 2"
+global version; version = "alpha2"
+
+global title; title = "PlaMemo Translator - " + versionstr
+global appid; appid = "plamemo.translator." + version
+
+# Set console window title
+if plt == "Windows":
+    ctypes.windll.kernel32.SetConsoleTitleA(title + " (Log)") # ANSI
+    ctypes.windll.kernel32.SetConsoleTitleW(title + " (Log)") # UNICODE
+
+# A different app ID is required for a custom icon
+if plt == "Windows":
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
 
 def config(num=0, default="", cfg="config.txt"):
     num = num - 1
@@ -50,6 +70,7 @@ def config(num=0, default="", cfg="config.txt"):
 
 global logf; logf = config(31, "log.txt")
 global encoding; encoding = config(11, "utf-8")
+devnull = open(os.devnull, "w", encoding=encoding)
 
 class LoggerOut(object):
     def __init__(self):
@@ -86,8 +107,6 @@ required = {"googletrans==4.0.0-rc1", "PyQt5"} # Add modules that aren't install
 installed = {pkg.key for pkg in pkg_resources.working_set}
 missing = required - installed
 
-devnull = open(os.devnull, "w", encoding=encoding)
-
 if missing:
     python = sys.executable
     try:
@@ -95,26 +114,7 @@ if missing:
     except Exception:
         pass
 
-global plt; plt = platform.system()
-
 print()
-
-# The version name can be set here.
-# It should be changed only by an administrator of the project.
-global versionstr; versionstr = "Alpha 2"
-global version; version = "alpha2"
-
-global title; title = "PlaMemo Translator - " + versionstr
-global appid; appid = "plamemo.translator." + version
-
-# Set console window title
-if plt == "Windows":
-    ctypes.windll.kernel32.SetConsoleTitleA(title + " (Log)") # ANSI
-    ctypes.windll.kernel32.SetConsoleTitleW(title + " (Log)") # UNICODE
-
-# A different app ID is required for a custom icon
-if plt == "Windows":
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
 
 print(title)
 
@@ -147,9 +147,6 @@ print("Loading UI...")
 
 global app; app = QApplication(sys.argv)
 app.setStyle(config(7, "Fusion"))
-
-# To check available skins, execute this code in your Python console:
-# import PyQt5.QtWidgets; print(PyQt5.QtWidgets.QStyleFactory.keys())
 
 fontDatabase = QtGui.QFontDatabase()
 fontDatabase.addApplicationFont("fonts/KosugiMaru-Regular.ttf")
@@ -305,12 +302,12 @@ class Ui(QMainWindow):
                 elif scriptmethod == "shplain":
                     subprocess.call(["sh", cfile]); print(); print("Compiling done.")
                 elif scriptmethod == "shdotslash":
-                    subprocess.call(["sh", "./" + cfile]); print(); print("Compiling done.")
+                    subprocess.call(["sh", r"./" + cfile]); print(); print("Compiling done.")
             else:
                 if plt == "Windows":
                     subprocess.call([cfile]); print(); print("Compiling done.")
                 elif plt == "Linux":
-                    subprocess.call(["sh", "./" + cfile]); print(); print("Compiling done.")
+                    subprocess.call(["sh", r"./" + cfile]); print(); print("Compiling done.")
                 elif plt == "Darwin":
                     subprocess.call([r"./" + cfile]); print(); print("Compiling done.")
 
