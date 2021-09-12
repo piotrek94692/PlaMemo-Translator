@@ -217,15 +217,23 @@ class Ui(QMainWindow):
             if not aboutopen:
                 windowabout = AboutUi(); windowabout.exec()
 
+        def returnline():
+            global line
+            if loaded:
+                line = 1
+                resettranslate()
+                resetempty()
+                mw.updateline()
+
         def left():
             global line
             global loaded
             if loaded:
                 if line > 1:
                     line -= 1
-                resettranslate()
-                resetempty()
-                mw.updateline()
+                    resettranslate()
+                    resetempty()
+                    mw.updateline()
 
         def sceneleft():
             global scene
@@ -233,9 +241,9 @@ class Ui(QMainWindow):
             if loaded:
                 if scene > 1:
                     scene -= 1
-                resettranslate()
-                resetempty()
-                mw.updateline()
+                    resettranslate()
+                    resetempty()
+                    mw.updateline()
 
         def sceneright():
             global scene
@@ -336,6 +344,8 @@ class Ui(QMainWindow):
         self.rightbutton.clicked.connect(right)
         self.sceneleftbutton.clicked.connect(sceneleft)
         self.scenerightbutton.clicked.connect(sceneright)
+
+        self.returnbutton.clicked.connect(returnline)
 
         self.resetbutton.clicked.connect(reset)
         self.trashbutton.clicked.connect(resetempty)

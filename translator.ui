@@ -347,7 +347,7 @@
    <widget class="QPushButton" name="leftbutton">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>340</y>
       <width>31</width>
       <height>23</height>
@@ -375,7 +375,7 @@
    <widget class="QPushButton" name="rightbutton">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>150</x>
       <y>340</y>
       <width>31</width>
       <height>23</height>
@@ -869,7 +869,7 @@
    <widget class="QPushButton" name="sceneleftbutton">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>40</x>
       <y>350</y>
       <width>31</width>
       <height>23</height>
@@ -897,7 +897,7 @@
    <widget class="QPushButton" name="scenerightbutton">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>190</x>
       <y>350</y>
       <width>31</width>
       <height>23</height>
@@ -914,6 +914,34 @@
     <property name="icon">
      <iconset resource="resource.qrc">
       <normaloff>:/arrowrights/images/arrowrights.png</normaloff>:/arrowrights/images/arrowrights.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>12</width>
+      <height>12</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="returnbutton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>340</y>
+      <width>21</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/reset/images/reset.png</normaloff>:/reset/images/reset.png</iconset>
     </property>
     <property name="iconSize">
      <size>
