@@ -35,13 +35,15 @@
 # Please report if the links aren't working.
 #
 
+from config import config
+
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 global plt; plt = platform.system()
 
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
-global versionstr; versionstr = "Alpha 2"
-global version; version = "alpha2"
+global versionstr; versionstr = "Alpha 3"
+global version; version = "alpha3"
 
 global title; title = "PlaMemo Translator - " + versionstr
 global appid; appid = "plamemo.translator." + version
@@ -55,21 +57,8 @@ if plt == "Windows":
 if plt == "Windows":
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
 
-def config(num=0, default="", cfg="config.txt"):
-    num = num - 1
-    try:
-        f = open("config/" + cfg, encoding="utf-8") # Encoding for configs must be UTF-8, as the config system is used to set encoding for other files
-    except Exception:
-        return default
-    lines = f.readlines()
-    try:
-        lines[num]
-    except Exception:
-        return default
-    return lines[num].strip()
-
-global logf; logf = config(31, "log.txt")
-global encoding; encoding = config(11, "utf-8")
+global logf; logf = config.logf
+global encoding; encoding = config.encoding
 devnull = open(os.devnull, "w", encoding=encoding)
 
 class LoggerOut(object):
@@ -103,17 +92,6 @@ sys.stderr = LoggerErr()
 
 print("Loading...")
 
-required = {"googletrans==4.0.0-rc1", "PyQt5"} # Add modules that aren't installed by default, here
-installed = {pkg.key for pkg in pkg_resources.working_set}
-missing = required - installed
-
-if missing:
-    python = sys.executable
-    try:
-        subprocess.check_call([python, "-m", "pip", "install", *missing], stdout=devnull)
-    except Exception:
-        pass
-
 print()
 
 print(title)
@@ -123,9 +101,19 @@ print()
 print("Importing extras...")
 from datetime import datetime
 from subprocess import Popen
-from googletrans import Translator
+try:
+    from googletrans import Translator
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'googletrans==4.0.0-rc1'], stdout=devnull)
+finally:
+    from googletrans import Translator
 print("Importing UI base...")
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+try:
+    from PyQt5 import QtCore, QtGui, QtWidgets, uic
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'PyQt5'], stdout=devnull)
+finally:
+    from PyQt5 import QtCore, QtGui, QtWidgets, uic
 print("Importing UI extras...")
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -146,7 +134,7 @@ print("Loading resources done.")
 print("Loading UI...")
 
 global app; app = QApplication(sys.argv)
-app.setStyle(config(7, "Fusion"))
+app.setStyle(config.skin)
 
 fontDatabase = QtGui.QFontDatabase()
 fontDatabase.addApplicationFont("fonts/KosugiMaru-Regular.ttf")
@@ -278,9 +266,9 @@ class Ui(QMainWindow):
             print("Compiling...")
             print()
             cfile = "compile.bat" # Windows support is priority
-            scripttype = config(15, "auto")
-            scriptmethod = config(23, "auto")
-            customfile = config(27, "none")
+            scripttype = config.scripttype
+            scriptmethod = config.scriptmethod
+            customfile = config.customfile
             if not scripttype in ("auto", "bat", "sh", "bash"):
                 scripttype = "auto"
             if not scriptmethod in ("auto", "plain", "dotslash", "shplain", "shdotslash"):

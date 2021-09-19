@@ -1,5 +1,5 @@
 To change the app's settings, go to the "config" folder.
 
 List of config files:
-config.txt - basic settings
+config.py - basic settings
 deeplapi.txt - put the DeepL API key here
