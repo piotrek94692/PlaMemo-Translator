@@ -38,7 +38,15 @@
 from config import config
 
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
+from subprocess import Popen
 global plt; plt = platform.system()
+
+global logf; logf = config.logf
+global encoding; encoding = config.encoding
+devnull = open(os.devnull, "w", encoding=encoding)
+
+if plt == "Windows":
+    subprocess.check_call(["chcp", "65001"], shell=True, stdout=devnull)
 
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
@@ -56,10 +64,6 @@ if plt == "Windows":
 # A different app ID is required for a custom icon
 if plt == "Windows":
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
-
-global logf; logf = config.logf
-global encoding; encoding = config.encoding
-devnull = open(os.devnull, "w", encoding=encoding)
 
 class LoggerOut(object):
     def __init__(self):
@@ -100,12 +104,11 @@ print()
 
 print("Importing extras...")
 from datetime import datetime
-from subprocess import Popen
 try:
     from googletrans import Translator
 except ImportError:
     try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", 'googletrans==4.0.0-rc1'], stdout=devnull)
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "googletrans==4.0.0-rc1"], shell=True, stdout=devnull)
     except subprocess.CalledProcessError as e:
         pass
 finally:
@@ -115,7 +118,7 @@ try:
     from PyQt5 import QtCore, QtGui, QtWidgets, uic
 except ImportError:
     try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", 'PyQt5'], stdout=devnull)
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "PyQt5"], shell=True, stdout=devnull)
     except subprocess.CalledProcessError as e:
         pass
 finally:
