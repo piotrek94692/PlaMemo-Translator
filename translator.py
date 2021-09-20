@@ -47,6 +47,7 @@ devnull = open(os.devnull, "w", encoding=encoding)
 
 if plt == "Windows":
     subprocess.check_call(["chcp", "65001"], shell=True, stdout=devnull)
+    subprocess.check_call(["set", '"PYTHONIOENCODING=UTF-8"'], shell=True, stdout=devnull)
 
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
