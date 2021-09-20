@@ -104,14 +104,20 @@ from subprocess import Popen
 try:
     from googletrans import Translator
 except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", 'googletrans==4.0.0-rc1'], stdout=devnull)
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", 'googletrans==4.0.0-rc1'], stdout=devnull)
+    except subprocess.CalledProcessError as e:
+        pass
 finally:
     from googletrans import Translator
 print("Importing UI base...")
 try:
     from PyQt5 import QtCore, QtGui, QtWidgets, uic
 except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", 'PyQt5'], stdout=devnull)
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", 'PyQt5'], stdout=devnull)
+    except subprocess.CalledProcessError as e:
+        pass
 finally:
     from PyQt5 import QtCore, QtGui, QtWidgets, uic
 print("Importing UI extras...")
