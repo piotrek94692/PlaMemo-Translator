@@ -39,3 +39,5 @@ No, PyQt6 is missing some useful features.
 - Text preview window
 - Automatic character name replacer
 - Jumping back/forward by a certain amount of lines
+- DeepL translator
+- And more!
