@@ -18,7 +18,7 @@ It might work on other games, and also on other platforms, when we'll verify tha
 **MacOS 10.11 or higher** (didn't test, but it probably won't run on lower than this) - extra support, expect issues, **we recommend using Windows or Linux instead**
 
 ## The app crashes! Something doesn't work!
-**Attention: An update that will fix most of the issues is in development, please be patient.**
+**Attention: An update that will fix most of the issues is in development, please be patient.**<br>
 Although the app is 100% working under certain conditions,<br>
 you might encounter crashes or certain features might not work.<br>
 That can happen because of your OS, Python version, installed modules, and more.
