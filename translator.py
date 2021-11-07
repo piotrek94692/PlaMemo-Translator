@@ -104,18 +104,18 @@ def launchscript(cfile):
     scriptmethod = config.scriptmethod
     if not scripttype == "auto":
         if scripttype == "bat":
-            cfile == cfile + ".bat"
+            cfile = cfile + ".bat"
         elif scripttype == "sh":
-            cfile == cfile + ".sh"
+            cfile = cfile + ".sh"
         elif scripttype == "bash":
-            cfile == cfile + ".bash"
+            cfile = cfile + ".bash"
     else:
         if plt == "Windows":
-            cfile == cfile + ".bat"
+            cfile = cfile + ".bat"
         elif plt == "Linux":
-            cfile == cfile + ".sh"
+            cfile = cfile + ".sh"
         elif plt == "Darwin":
-            cfile == cfile + ".bash"
+            cfile = cfile + ".bash"
     if not scripttype in ("auto", "bat", "sh", "bash"):
         scripttype = "auto"
     if not scriptmethod in ("auto", "plain", "dotslash", "shplain", "shdotslash"):
