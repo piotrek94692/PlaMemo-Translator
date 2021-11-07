@@ -13,7 +13,8 @@
 # for the PC port of the Plastic Memories visual novel game,
 # released as an exclusive for PlayStation Vita.
 #
-# The tool probably can be used on any other Kaleido ADV Workshop games, including the PS Vita version of PlaMemo, but that needs to be verified.
+# The tool probably can be used on any other Kaleido ADV Workshop games,
+# including the PS Vita version of PlaMemo, but that needs to be verified.
 # The tool will be rebranded in the future, with an option to turn on the classic Plastic Memories branding.
 #
 # Created by PIESEL and contributors.
@@ -31,7 +32,7 @@
 # https://discord.com/invite/zKpYhe3Qnf
 # An early version of an English translation is available here.
 #
-# Contact: PIESEL#8040
+# Contact: PIESEL#8040 [Discord]
 # Please report if the links aren't working.
 #
 
@@ -46,13 +47,19 @@ global encoding; encoding = config.encoding
 devnull = open(os.devnull, "w", encoding=encoding)
 
 if plt == "Windows":
-    subprocess.check_call(["chcp", "65001"], shell=True, stdout=devnull)
-    subprocess.check_call(["set", '"PYTHONIOENCODING=UTF-8"'], shell=True, stdout=devnull)
+    try:
+        subprocess.check_call(["chcp", "65001"], shell=True, stdout=devnull)
+    except:
+        pass
+    try:
+        subprocess.check_call(["set", '"PYTHONIOENCODING=UTF-8"'], shell=True, stdout=devnull)
+    except:
+        pass
 
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
-global versionstr; versionstr = "Alpha 3"
-global version; version = "alpha3"
+global versionstr; versionstr = "Alpha 4"
+global version; version = "alpha4"
 
 global title; title = "PlaMemo Translator - " + versionstr
 global appid; appid = "plamemo.translator." + version
@@ -92,6 +99,46 @@ class LoggerErr(object):
     def flush(self):
         pass
 
+def launchscript(cfile):
+    scripttype = config.scripttype
+    scriptmethod = config.scriptmethod
+    if not scripttype == "auto":
+        if scripttype == "bat":
+            cfile == cfile + ".bat"
+        elif scripttype == "sh":
+            cfile == cfile + ".sh"
+        elif scripttype == "bash":
+            cfile == cfile + ".bash"
+    else:
+        if plt == "Windows":
+            cfile == cfile + ".bat"
+        elif plt == "Linux":
+            cfile == cfile + ".sh"
+        elif plt == "Darwin":
+            cfile == cfile + ".bash"
+    if not scripttype in ("auto", "bat", "sh", "bash"):
+        scripttype = "auto"
+    if not scriptmethod in ("auto", "plain", "dotslash", "shplain", "shdotslash"):
+        scriptmethod = "auto"
+    if not scriptmethod == "auto":
+        if scriptmethod == "plain":
+            os.system(cfile)
+        elif scriptmethod == "dotslash":
+            os.system("./" + cfile)
+        elif scriptmethod == "shplain":
+            os.system("sh " + cfile)
+        elif scriptmethod == "shdotslash":
+            os.system("sh ./" + cfile)
+    else:
+        if plt == "Windows":
+            os.system(cfile)
+        elif plt == "Linux":
+            os.system("sh ./" + cfile)
+        elif plt == "Darwin":
+            os.system("./" + cfile)
+
+def skillapp(): ThisIsNotAnError.KillAppFunction(HasBeenUsed)
+
 sys.stdout = LoggerOut()
 sys.stderr = LoggerErr()
 
@@ -108,22 +155,14 @@ from datetime import datetime
 try:
     from googletrans import Translator
 except ImportError:
-    try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "googletrans==4.0.0-rc1"], shell=True, stdout=devnull)
-    except subprocess.CalledProcessError as e:
-        pass
-finally:
-    from googletrans import Translator
+    launchscript("install")
+    skillapp()
 print("Importing UI base...")
 try:
     from PyQt5 import QtCore, QtGui, QtWidgets, uic
 except ImportError:
-    try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "PyQt5"], shell=True, stdout=devnull)
-    except subprocess.CalledProcessError as e:
-        pass
-finally:
-    from PyQt5 import QtCore, QtGui, QtWidgets, uic
+    launchscript("install")
+    skillapp()
 print("Importing UI extras...")
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -329,7 +368,7 @@ class Ui(QMainWindow):
             realscene = scene - 1
             file["scenes"][realscene]["texts"][realline][2] = self.newtext.toPlainText()
             with open(fileName, "w", encoding=encoding) as f:
-                json.dump(file, f, ensure_ascii=False, indent=4) # Set JSON indent here
+                json.dump(file, f, ensure_ascii=False, indent=config.indent)
                 print()
                 print("Saved the line number " + str(line) + " in scene " + str(scene))
 

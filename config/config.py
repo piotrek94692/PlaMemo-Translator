@@ -28,3 +28,7 @@ customfile = "none"
 # Log file
 
 logf = "log.txt"
+
+# JSON indent
+
+indent = 4
