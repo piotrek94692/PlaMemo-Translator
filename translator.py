@@ -327,18 +327,18 @@ class Ui(QMainWindow):
             else:
                 if not scripttype == "auto":
                     if scripttype == "bat":
-                        cfile == "compile.bat"
+                        cfile = "compile.bat"
                     elif scripttype == "sh":
-                        cfile == "compile.sh"
+                        cfile = "compile.sh"
                     elif scripttype == "bash":
-                        cfile == "compile.bash"
+                        cfile = "compile.bash"
                 else:
                     if plt == "Windows":
-                        cfile == "compile.bat"
+                        cfile = "compile.bat"
                     elif plt == "Linux":
-                        cfile == "compile.sh"
+                        cfile = "compile.sh"
                     elif plt == "Darwin":
-                        cfile == "compile.bash"
+                        cfile = "compile.bash"
             if not scriptmethod == "auto":
                 if scriptmethod == "plain":
                     subprocess.call([cfile]); print(); print("Compiling done.")
