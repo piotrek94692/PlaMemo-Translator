@@ -179,15 +179,17 @@
     <rect>
      <x>50</x>
      <y>20</y>
-     <width>181</width>
+     <width>201</width>
      <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>MotoyaLMaru</family>
      <pointsize>15</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
     </font>
    </property>
    <property name="text">
@@ -224,9 +226,11 @@
    </property>
    <property name="font">
     <font>
+     <family>Corbel</family>
      <pointsize>15</pointsize>
      <weight>50</weight>
      <bold>false</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
     </font>
    </property>
    <property name="text">
@@ -250,9 +254,11 @@
    </property>
    <property name="font">
     <font>
+     <family>Corbel</family>
      <pointsize>15</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
     </font>
    </property>
    <property name="text">
@@ -276,9 +282,11 @@
    </property>
    <property name="font">
     <font>
+     <family>Corbel</family>
      <pointsize>10</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
     </font>
    </property>
    <property name="text">

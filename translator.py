@@ -137,7 +137,7 @@ def launchscript(cfile):
         elif plt == "Darwin":
             os.system("./" + cfile)
 
-def skillapp(): ThisIsNotAnError.KillAppFunction(HasBeenUsed)
+def skillapp(): ThisIsNotAnError.KillAppFunction(HasBeenUsed) # Watch out for the second kill app function
 
 sys.stdout = LoggerOut()
 sys.stderr = LoggerErr()
@@ -186,7 +186,7 @@ global app; app = QApplication(sys.argv)
 app.setStyle(config.skin)
 
 fontDatabase = QtGui.QFontDatabase()
-fontDatabase.addApplicationFont("fonts/KosugiMaru-Regular.ttf")
+fontDatabase.addApplicationFont("fonts/KosugiMaru-Regular.ttf") # Set font for text boxes
 
 global mw # Use "mw" to reference "self" from the main window, outside of it
 
@@ -356,7 +356,7 @@ class Ui(QMainWindow):
                 elif plt == "Darwin":
                     subprocess.call([r"./" + cfile]); print(); print("Compiling done.")
 
-        def killapp(): global notlooping; notlooping = True; ThisIsNotAnError.KillAppFunction(HasBeenUsed)
+        def killapp(): global notlooping; notlooping = True; ThisIsNotAnError.KillAppFunction(HasBeenUsed) # Watch out for the second kill app function
 
         def apply():
             global file
@@ -415,7 +415,7 @@ class Ui(QMainWindow):
         self.translatetext1.setPlainText(translate1.text)
 
     def updateline(self):
-        global linetext; global file; global line; global char1; global char2; global loaded; global scene
+        global linetext; global file; global line; global char1; global char2; global loaded; global scene; global scenelabel
         realline = line - 1
         realscene = scene - 1
         try:
@@ -434,6 +434,14 @@ class Ui(QMainWindow):
         except Exception:
             self.characterextra.setPlainText("")
         mw.translate(linetext)
+        if line == len(file["scenes"][0]["texts"]):
+            linetext.setStyleSheet("color: red;")
+        else:
+            linetext.setStyleSheet("color: black;")
+        if scene == len(file["scenes"]):
+            scenelabel.setStyleSheet("color: red;")
+        else:
+            linetext.setStyleSheet("color: black;")
         loaded = True
 
 window = Ui()

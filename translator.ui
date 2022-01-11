@@ -193,15 +193,18 @@
      <rect>
       <x>50</x>
       <y>15</y>
-      <width>181</width>
+      <width>201</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>MotoyaLMaru</family>
       <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="frameShape">
@@ -227,6 +230,8 @@
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -268,10 +273,15 @@
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Enter text here...</string>
     </property>
    </widget>
    <widget class="QLabel" name="newlabel">
@@ -298,9 +308,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -355,7 +368,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -383,7 +401,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -471,6 +494,8 @@
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -517,9 +542,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -571,6 +599,8 @@
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -617,9 +647,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -718,6 +751,8 @@
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -805,6 +840,8 @@
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="sizeAdjustPolicy">
@@ -854,9 +891,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -877,7 +917,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -905,7 +950,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -933,7 +983,12 @@
     </property>
     <property name="font">
      <font>
+      <family>Corbel</family>
       <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -957,7 +1012,7 @@
      <x>0</x>
      <y>0</y>
      <width>680</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
