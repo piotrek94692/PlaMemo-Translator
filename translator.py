@@ -40,6 +40,7 @@ from config import config
 
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 from subprocess import Popen
+from datetime import datetime
 global plt; plt = platform.system()
 
 global logf; logf = config.logf
@@ -151,7 +152,6 @@ print(title)
 print()
 
 print("Importing extras...")
-from datetime import datetime
 try:
     from googletrans import Translator
 except ImportError:
