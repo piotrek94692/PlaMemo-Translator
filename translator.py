@@ -7,7 +7,7 @@
 # / ___/| | (_| / /\/\ \  __/ | | | | | (_) |  / /  | | | (_| | | | \__ \ | (_| | || (_) | |
 # \/    |_|\__,_\/    \/\___|_| |_| |_|\___/   \/   |_|  \__,_|_| |_|___/_|\__,_|\__\___/|_|
 #
-# 2021
+# 2022
 #
 # This is an unofficial automatized translation tool
 # for the PC port of the Plastic Memories visual novel game,
