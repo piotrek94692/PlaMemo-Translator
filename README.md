@@ -6,8 +6,13 @@ Created by PIESEL and contributors.
 # FAQ
 
 ## How to launch the app?
-1. Install the [latest version of Python](https://www.python.org/downloads) (we are currently targeting Python 3.10)
+
+### From source code
+1. Install the [latest version of Python](https://www.python.org/downloads) (we are currently targeting Python 3.10.*)
 2. Launch `translator.py`
+
+### Binary version for Windows
+1. Launch `translator.exe`
 
 ## Does it work with any other Kaleido ADV Workshop games? What about the PS Vita version of PlaMemo?
 It might work on other games, and also on other platforms, when we'll verify that it works, the tool will be rebranded and PlaMemo branding will be optional.
