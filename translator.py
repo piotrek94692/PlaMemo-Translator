@@ -23,7 +23,7 @@
 #
 # Links:
 #
-# r/PlaMemo - Isla's Paradise
+# r/PlaMemo
 # https://discord.com/invite/FattVGH
 # PC port of the game and decompilation tools are available here.
 # (Or you can get regular FreeMote decompilation tools from GitHub, here: https://github.com/UlyssesWu/FreeMote)
@@ -31,6 +31,12 @@
 # Name Subject to Change
 # https://discord.com/invite/zKpYhe3Qnf
 # An early version of an English translation is available here.
+#
+#
+#
+# PlaMemo Tech
+# https://discord.com/invite/ecggjAJjhJ
+# Official server for PlaMemo Translator and other projects.
 #
 # Contact: PIESEL#8040 [Discord]
 # Please report if the links aren't working.
