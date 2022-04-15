@@ -47,10 +47,11 @@ from config import config
 import sys, subprocess, pkg_resources, ctypes, platform, os, glob, time, datetime, threading, json # Import basic modules
 from subprocess import Popen
 from datetime import datetime
-global plt; plt = platform.system()
 
-global logf; logf = config.logf
-global encoding; encoding = config.encoding
+global plt, logf, encoding, devnull
+plt = platform.system()
+logf = config.logf
+encoding = config.encoding
 devnull = open(os.devnull, "w", encoding=encoding)
 
 if plt == "Windows":
@@ -63,13 +64,15 @@ if plt == "Windows":
     except:
         pass
 
+global versionstr, version, title, appid
+
 # The version name can be set here.
 # It should be changed only by an administrator of the project.
-global versionstr; versionstr = "Alpha 4"
-global version; version = "alpha4"
+versionstr = "Alpha 4"
+version = "alpha4"
 
-global title; title = "PlaMemo Translator - " + versionstr
-global appid; appid = "plamemo.translator." + version
+title = "PlaMemo Translator - " + versionstr
+appid = "plamemo.translator." + version
 
 # Set console window title
 if plt == "Windows":
@@ -177,8 +180,9 @@ from PyQt5.uic import *
 print("Importing done.")
 
 # Set the clock
-global now; now = datetime.now()
-global current_time; current_time = now.strftime("%H:%M:%S")
+global now, current_time
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
 
 print()
 
@@ -195,18 +199,17 @@ fontDatabase = QtGui.QFontDatabase()
 fontDatabase.addApplicationFont("fonts/KosugiMaru-Regular.ttf") # Set font for text boxes
 
 global mw # Use "mw" to reference "self" from the main window, outside of it
+global line, scene, loaded, notlooping, aboutopen
 
-global line; line = 1
-global scene; scene = 1
+line = 1
+scene = 1
 
-global loaded; loaded = False # Is a file loaded?
-global notlooping; notlooping = False
-global aboutopen; aboutopen = False # Is the About window open?
+loaded = False # Is a file loaded?
+notlooping = False
+aboutopen = False # Is the About window open?
 
 def openFileNameDialog(self):
-    global file
-    global fileName
-    global encoding
+    global file, fileName, encoding
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
     dialog = QFileDialog
@@ -220,12 +223,11 @@ def openFileNameDialog(self):
 
 class AboutUi(QDialog):
     def __init__(self):
-        global aboutopen
-        global versionstr
+        global aboutopen, versionstr
         aboutopen = True
         super(AboutUi, self).__init__()
         loadUi("about.ui", self) # Load the About window UI file
-        self.abouttext_2.setText("Made by PIESEL#8040.                                             Version: " + versionstr)
+        self.abouttext_2.setText("Made by PIESEL#8040.\nVersion: " + versionstr)
         self.setWindowFlags(self.windowFlags() | Qt.CustomizeWindowHint)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
@@ -240,12 +242,11 @@ class Ui(QMainWindow):
 
     def __init__(self):
 
-        global mw; mw = self
-        global title
+        global mw, title; mw = self
 
         def resettranslate():
-            global translate1; translate1 = "Please wait..."
-            global translate2; translate2 = "Please wait..."
+            global translate1, translate2
+            translate1 = translate2 = "Please wait..."
 
         resettranslate()
 
@@ -269,8 +270,7 @@ class Ui(QMainWindow):
                 mw.updateline()
 
         def left():
-            global line
-            global loaded
+            global line, loaded
             if loaded:
                 if line > 1:
                     line -= 1
@@ -279,8 +279,7 @@ class Ui(QMainWindow):
                     mw.updateline()
 
         def sceneleft():
-            global scene
-            global loaded
+            global scene, loaded
             if loaded:
                 if scene > 1:
                     scene -= 1
@@ -289,9 +288,7 @@ class Ui(QMainWindow):
                     mw.updateline()
 
         def sceneright():
-            global scene
-            global loaded
-            global file
+            global scene, loaded, file
             realscene = scene - 1
             if loaded:
                 if scene < len(file["scenes"]):
@@ -301,9 +298,7 @@ class Ui(QMainWindow):
                     mw.updateline()
 
         def right():
-            global line
-            global loaded
-            global file
+            global line, loaded, file
             if loaded:
                 if line < len(file["scenes"][0]["texts"]):
                     line += 1
@@ -365,11 +360,7 @@ class Ui(QMainWindow):
         def killapp(): global notlooping; notlooping = True; ThisIsNotAnError.KillAppFunction(HasBeenUsed) # Watch out for the second kill app function
 
         def apply():
-            global file
-            global line
-            global scene
-            global fileName
-            global encoding
+            global file, line, scene, fileName, encoding
             realline = line - 1
             realscene = scene - 1
             file["scenes"][realscene]["texts"][realline][2] = self.newtext.toPlainText()
@@ -404,10 +395,10 @@ class Ui(QMainWindow):
         # This code is always executed in a loop
         def loop():
             while True:
-                global line; self.linelabel.setText("Line: " + str(line))
-                global scene; self.scenelabel.setText("Scene: " + str(scene))
-                global current_time; global now; now = datetime.now(); current_time = now.strftime("%H:%M:%S"); self.time.setText(current_time)
-                global notlooping
+                global line, scene, current_time, now, notlooping
+                self.linelabel.setText("Line: " + str(line))
+                self.scenelabel.setText("Scene: " + str(scene))
+                now = datetime.now(); current_time = now.strftime("%H:%M:%S"); self.time.setText(current_time)
                 if notlooping:
                     break
 
@@ -421,7 +412,7 @@ class Ui(QMainWindow):
         self.translatetext1.setPlainText(translate1.text)
 
     def updateline(self):
-        global linetext; global file; global line; global char1; global char2; global loaded; global scene; global scenelabel
+        global linetext, file, line, char1, char2, loaded, scene, scenelabel
         realline = line - 1
         realscene = scene - 1
         try:
