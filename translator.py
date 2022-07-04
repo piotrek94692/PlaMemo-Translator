@@ -28,7 +28,7 @@
 # PC port of the game and decompilation tools are available here.
 # (Or you can get regular FreeMote decompilation tools from GitHub, here: https://github.com/UlyssesWu/FreeMote)
 #
-# Name Subject to Change
+# Isla Execution Squad
 # https://discord.com/invite/zKpYhe3Qnf
 # An early version of an English translation is available here.
 #
@@ -56,7 +56,7 @@ devnull = open(os.devnull, "w", encoding=encoding)
 
 if plt == "Windows":
     try:
-        subprocess.check_call(["chcp", "65001"], shell=True, stdout=devnull)
+        subprocess.check_call(["chcp", "65001"], shell=True, stdout=devnull) # Doesn't work on Windows 11 iirc
     except:
         pass
     try:
